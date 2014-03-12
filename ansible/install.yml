@@ -1,6 +1,10 @@
 ---
-- hosts: vagrant
-  remote_user: vagrant
-  sudo: yes
+- hosts: localhost
+  remote_user: root
+  #sudo: yes
   roles:
     - common
+    - nginx
+    - mysql
+    - php5
+    - rabbitmq
