@@ -15,7 +15,7 @@ This will help you to quickly setup your server environment:
 - rabbitmq
 
 # How to use
-This README is meant for beginners who haven't work with ansible before
+This is meant for beginners who haven't worked with ansible before
 
 1.Install ansible
 ~~~
