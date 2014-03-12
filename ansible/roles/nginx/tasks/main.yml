@@ -1,0 +1,15 @@
+---
+- name: Add repo nginx to get latest version
+  apt_repository: repo='deb http://nginx.org/packages/ubuntu/ precise nginx'
+
+- name: Add public key for your package
+  command: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ABF5BD827BD9BF62
+
+- name: Install nginx
+  apt: pkg=nginx state=latest update_cache=yes
+
+- name: Copy nginx alice.conf
+  template: src=local.conf.j2 dest=/etc/nginx/conf.d/local.conf
+
+- name: Start nginx
+  service: name=nginx state=started

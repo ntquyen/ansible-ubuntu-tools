@@ -1,0 +1,18 @@
+---
+- name: Update OS
+  apt: update_cache=yes
+
+- name: Upgrade OS
+  apt: upgrade=full
+
+- name: Install java
+  apt: pkg=openjdk-7-jre state=latest
+
+- name: Install memcached
+  apt: pkg=memcached state=latest
+
+- name: Add repo for svn 1.7
+  apt_repository: repo='ppa:dominik-stadler/subversion-1.7' update_cache=yes
+
+- name: Install svn 1.7
+  apt: pkg=subversion state=latest

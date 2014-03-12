@@ -1,0 +1,16 @@
+---
+######### mysql variables #############
+
+# You shouldn't need to change this.
+mysql_port: 3306
+
+# MySQL Root Pass
+mysql_root_db_pass: root
+
+######### nginx variables #############
+
+# The folder containing source code, for example on sandbox is shop.dev
+source_folder_name: lzd.dev
+
+# Local domain name
+local_domain: localhost

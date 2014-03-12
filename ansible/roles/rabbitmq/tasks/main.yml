@@ -1,0 +1,18 @@
+---
+- name: Add repo rabbitmq to get latest version
+  apt_repository: repo='deb http://www.rabbitmq.com/debian/ testing main' update_cache=yes
+
+- name: Add public key for your package
+  apt_key: url=http://www.rabbitmq.com/rabbitmq-signing-key-public.asc state=present
+
+- name: Install rabbitmq + dependencies
+  apt: pkg={{ item }} state=latest update_cache=yes
+  with_items:
+    - erlang-nox
+    - rabbitmq-server
+    - libssl0.9.8
+
+- name: Enable plugins:
+  command: rabbitmq-plugins enable rabbitmq_amqp1_0 rabbitmq_management rabbitmq_mqtt rabbitmq_stomp
+  notify:
+    - Start rabbitmq-server

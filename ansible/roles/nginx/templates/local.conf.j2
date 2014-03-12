@@ -1,0 +1,38 @@
+server {
+    listen   80;
+    server_name alice.local;
+    set $myroot "/var/www/html";
+
+    access_log /var/log/nginx/alice.access.log; # Change to where you want
+    error_log  /var/log/nginx/alice.error.log; # Change to where you want
+    # add_header Host $host_name;
+    # add_header X-Server $servername;
+    gzip on;
+    gzip_min_length 1000;
+    gzip_types text/plain text/xml application/xml;
+    client_max_body_size    25m;
+    client_header_timeout   300;
+    client_body_timeout     300;
+    send_timeout            300;
+    root $myroot/lzd.dev/alice/public;
+    try_files $uri $uri/ /index.php?$args;
+    index index.html index.php;
+    set $myhttps "";
+    if ($http_x_forwarded_protocol = https) {
+        set $myhttps on;
+    }
+    location ~ \.php$ {
+        fastcgi_cache  off;
+        #fastcgi_pass   unix:/tmp/php-fpm.sock;
+        fastcgi_pass   unix:/var/run/php5-fpm.sock;
+        fastcgi_index  index.php;
+        include        fastcgi_params;
+        fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param  APPLICATION_ENV dev;
+        fastcgi_param  HTTPS $myhttps;
+        fastcgi_send_timeout 3600; # maybe no need
+        fastcgi_read_timeout 3600; # maybe no need
+        fastcgi_connect_timeout 3600; # maybe no need
+    }
+    proxy_ignore_client_abort on;
+}

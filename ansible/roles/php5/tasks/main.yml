@@ -1,0 +1,34 @@
+---
+- name: Install python-sofwares
+  apt: pkg=python-software-properties state=present
+
+- name: Add repo php5 to get lastest php # To get previous version, replace with php5-oldstable
+  apt_repository: repo='ppa:ondrej/php5' update_cache=yes
+
+- name: Install php5.4
+  apt: pkg=php5 state=latest
+  
+- name: Install php5-fpm
+  apt: pkg=php5-fpm state=latest
+  notify:
+    - Start nginx
+
+- name: Install php-pear
+  apt: pkg=php-pear state=present
+  notify:
+    - Upgrade php-pear
+
+- name: Auto discover php-pear
+  command: pear config-set auto_discover 1
+
+- name: Install PHPUnit
+  command: pear install -a pear.phpunit.de/PHPUnit
+
+- name: Install libraries
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - php5-curl
+    - php5-memcached
+    - php5-memcache
+    - php5-mysql
+    - php5-sqlite
