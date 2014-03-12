@@ -1,7 +1,19 @@
 ansible-ubuntu12.04-environment
 ===============
 
-Code for automated development environment setup
+Code for automated server environment setup
+
+This will help you to quickly setup your server environment:
+
+- Update OS
+- Java JDK 7 (1.7.x)
+- memcached
+- Subversion 1.7
+- nginx 1.4.6
+- php 5.5
+- mysql 5.5
+- rabbitmq
+
 # How to use
 This README is meant for beginners who haven't work with ansible before
 
