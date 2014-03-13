@@ -1,0 +1,12 @@
+<VirtualHost *:80>
+    ServerAdmin {{ server_admin }}
+    ServerName {{ alice_domain }}
+    SetEnv APPLICATION_ENV dev
+    DocumentRoot {{ source_folder_path }}/alice/public
+    <Directory {{ source_folder_path }}/alice/public>
+        Options Indexes FollowSymLinks -MultiViews
+        AllowOverride all
+        Order allow,deny
+        allow from all
+    </Directory>
+</VirtualHost>
