@@ -1,10 +1,10 @@
 server {
     listen   80;
-    server_name alice.local;
-    set $myroot "/var/www/html";
+    server_name {{ local_domain }};
+    root {{ source_path }};
 
-    access_log /var/log/nginx/alice.access.log; # Change to where you want
-    error_log  /var/log/nginx/alice.error.log; # Change to where you want
+    # access_log /var/log/nginx/access.log; # Change to where you want
+    # error_log  /var/log/nginx/error.log; # Change to where you want
     # add_header Host $host_name;
     # add_header X-Server $servername;
     gzip on;
@@ -14,7 +14,7 @@ server {
     client_header_timeout   300;
     client_body_timeout     300;
     send_timeout            300;
-    root $myroot/lzd.dev/alice/public;
+
     try_files $uri $uri/ /index.php?$args;
     index index.html index.php;
     set $myhttps "";

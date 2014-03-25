@@ -1,0 +1,6 @@
+---
+- name: Add repo for svn 1.7
+  apt_repository: repo='ppa:dominik-stadler/subversion-1.7' update_cache=yes
+
+- name: Install svn 1.7
+  apt: pkg=subversion state=latest

@@ -2,11 +2,8 @@
 - name: Install apache2
   apt: pkg=apache2 state=latest
 
-- name: Copy apache alice.conf
-  template: src=alice.conf.j2 dest=/etc/apache2/sites-enabled/alice.conf
-
-- name: Copy apache bob.conf
-  template: src=bob.conf.j2 dest=/etc/apache2/sites-enabled/bob.conf
+- name: Copy apache vhost config
+  template: src=vhost.conf.j2 dest=/etc/apache2/sites-enabled/vhost.conf
 
 - name: enable mod_rewrite
   command: a2enmod rewrite

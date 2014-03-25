@@ -1,9 +1,9 @@
 <VirtualHost *:80>
     ServerAdmin {{ server_admin }}
-    ServerName {{ bob_domain }}
+    ServerName {{ local_domain }}
     SetEnv APPLICATION_ENV dev
-    DocumentRoot {{ source_folder_path }}/bob/public
-    <Directory {{ source_folder_path }}/bob/public >
+    DocumentRoot {{ source_path }}
+    <Directory {{ source_path }} >
         Options Indexes FollowSymLinks -MultiViews
         AllowOverride all
         Order allow,deny
