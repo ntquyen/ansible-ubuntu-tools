@@ -1,6 +1,32 @@
 ---
 - name: Update OS
+  sudo: yes
   apt: update_cache=yes
 
 - name: Upgrade OS
+  sudo: yes
   apt: upgrade=full
+
+# Install python-pycurl to get around the error when doing npm install
+- name: Install python-pycurl
+  sudo: yes
+  apt: pkg=python-pycurl state=latest
+
+# Install libtool to get around the error when installing hiredis
+- name: Install libtool
+  sudo: yes
+  apt: pkg=libtool state=latest
+
+# Install make
+- name: Install make
+  sudo: yes
+  apt: pkg=make state=latest
+
+# Install build-essential (GNU gcc)
+- name: Install build-essential
+  sudo: yes
+  apt: pkg=build-essential state=latest
+
+- name: Install Git
+  sudo: yes
+  apt: pkg=git state=latest
