@@ -1,0 +1,5 @@
+---
+## There is a bug with service module, so use command instead
+- name: restart supervisor
+  sudo: yes
+  command: service supervisor restart

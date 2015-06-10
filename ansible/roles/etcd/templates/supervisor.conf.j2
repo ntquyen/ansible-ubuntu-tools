@@ -1,0 +1,8 @@
+[program:etcd]
+command = {{ etcd_bin_dir }}/etcd --listen-peer-urls "http://0.0.0.0:2380,http://0.0.0.0:5001" --listen-client-urls "http://0.0.0.0:2379,http://0.0.0.0:4001" --advertise-client-urls 'http://0.0.0.0:2379,http://0.0.0.0:4001'
+autorestart = false
+startsecs = 1
+startretries = 3
+stopasgroup = true
+stdout_logfile = /var/log/supervisor/etcd-out.log
+stderr_logfile = /var/log/supervisor/etcd-err.log

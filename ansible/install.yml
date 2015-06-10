@@ -1,10 +1,7 @@
 ---
-- hosts: localhost
-  remote_user: root
-  #sudo: yes
+- hosts: hosts
+  remote_user: vagrant
+  sudo: yes
   roles:
-    - common
-    - nginx
-    - mysql
-    - php5
-    - rabbitmq
+    - role: supervisor
+      tags: supervisor

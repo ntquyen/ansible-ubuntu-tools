@@ -1,0 +1,14 @@
+---
+- name: Install supervisor
+  sudo: yes
+  apt: name=supervisor state=latest
+
+- name: Copy init file
+  sudo: yes
+  template: src=supervisord.j2 dest=/etc/init.d/supervisord
+
+- name: Schedule
+  sudo: yes
+  command: update-rc.d supervisord defaults
+  notify:
+    - restart supervisor

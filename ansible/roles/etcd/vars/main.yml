@@ -1,0 +1,8 @@
+---
+etcd_version: v2.0.11
+download_file: "etcd-{{ etcd_version }}-linux-amd64.tar.gz"
+untar_dirname: "etcd-{{ etcd_version }}-linux-amd64"
+etcd_download_url: "https://github.com/coreos/etcd/releases/download/{{ etcd_version }}/{{ download_file }}"
+etcd_download_dir: /usr/src
+etcd_untar_dir: /var/lib
+etcd_bin_dir: /usr/local/bin

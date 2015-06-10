@@ -1,0 +1,29 @@
+---
+- name: Check if the code was already cloned
+  sudo: no
+  stat: path={{ etcd_download_dir }}/{{ download_file }}
+  register: src
+
+- name: Download etcd
+  sudo: yes
+  command: wget {{ etcd_download_url }} -P {{ etcd_download_dir }}/
+  when: src.stat.exists == false
+
+- name: Untar
+  sudo: yes
+  command: tar -xzf {{ etcd_download_dir }}/{{ download_file }} --directory {{ etcd_untar_dir }}
+
+- name: Copy execution file
+  sudo: yes
+  shell: cp {{ item }} {{ etcd_bin_dir }}
+  with_items:
+    - "{{ etcd_untar_dir }}/{{ untar_dirname }}/etcd"
+    - "{{ etcd_untar_dir }}/{{ untar_dirname }}/etcdctl"
+
+- name: Copy supervisor
+  sudo: yes
+  template: src=supervisor.conf.j2 dest=/etc/supervisor/conf.d/etcd.conf
+
+- name: Update supervisor
+  sudo: yes
+  command: supervisorctl update
